@@ -3,49 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <title>Modello AlphaFold 3D</title>
-  <script src="https://unpkg.com"></script>
   <style>
-    body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #ffffff; font-family: sans-serif; }
-    #viewport { width: 100%; height: 100vh; }
-    #legenda { position: absolute; bottom: 15px; left: 15px; background: rgba(255,255,255,0.9); padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 12px; z-index: 10; }
-    .box { display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: middle; }
+    body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+    iframe { width: 100%; height: 100vh; border: none; }
   </style>
 </head>
 <body>
-  <div id="viewport"></div>
-  <div id="legenda">
-    <strong>Confidenza AlphaFold (pLDDT):</strong><br>
-    <span class="box" style="background:#0053D6;"></span>Molto alta (&gt; 90)<br>
-    <span class="box" style="background:#65CBF3;"></span>Alta (70 - 90)<br>
-    <span class="box" style="background:#FFDB13;"></span>Bassa (50 - 70)<br>
-    <span class="box" style="background:#FF7D45;"></span>Molto bassa (&lt; 50)
-  </div>
-
+  <iframe id="molstar-frame"></iframe>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var stage = new NGL.Stage("viewport", { backgroundColor: "white" });
-      
-      var schemeId = NGL.ColormakerRegistry.addScheme(function (params) {
-        this.atomColor = function (atom) {
-          var b = atom.bfactor;
-          if (b >= 90) return 0x0053D6;
-          if (b >= 70) return 0x65CBF3;
-          if (b >= 50) return 0xFFDB13;
-          return 0xFF7D45;
-        };
-      });
-
-      stage.loadFile("./41b221db74753bae.cif", { ext: "cif" }).then(function (component) {
-        component.addRepresentation("cartoon", { color: schemeId });
-        component.autoView();
-      }).catch(function (error) {
-        alert("Errore caricamento struttura: " + error);
-      });
-
-      window.addEventListener("resize", function () {
-        stage.handleResize();
-      }, false);
-    });
+    var fileUrl = "https://github.io";
+    var molstarUrl = "https://molstar.org" + fileUrl + "&structure-url-format=mmcif";
+    document.getElementById("molstar-frame").src = molstarUrl;
   </script>
 </body>
 </html>
