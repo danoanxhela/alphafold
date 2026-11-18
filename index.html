@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <title>Modello AlphaFold 3D</title>
+  <link rel="stylesheet" type="text/css" href="https://ebi.ac.uk">
+  <script type="text/javascript" src="https://ebi.ac.uk"></script>
+  <style>
+    body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+    #viewer { position: relative; width: 100%; height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="viewer"></div>
+  <script>
+    var viewerInstance = new PDBeMolstarPlugin();
+    var options = {
+      customData: {
+        url: 'https://githubusercontent.com',
+        format: 'cif',
+        binary: false
+      },
+      alphafoldView: true,
+      bgColor: { r: 255, g: 255, b: 255 },
+      hideControls: false
+    };
+    viewerInstance.render(document.getElementById('viewer'), options);
+  </script>
+</body>
+</html>
